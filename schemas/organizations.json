@@ -42,9 +42,11 @@
 				"association": {
 					"title": "Zväz",
 					"transCode": "schema.org.club.association",
-					"objectLink": {
-						"registry": "organizations",
-						"name": "association.associationName"
+					"objectLink2": {
+						"schema":"uri://registries/organizations#views/association/view",
+						"fields":{
+							"name": "association.associationName"
+						}
 					}
 				},
 				"ico": {
@@ -60,9 +62,11 @@
 				"stadium": {
 					"title": "Štadión",
 					"transCode": "schema.org.club.stadium",
-					"objectLink": {
-						"registry": "stadiums",
-						"name": "baseData.name"
+					"objectLink2": {
+						"schema":"uri://registries/stadiums#views/stadium/view",
+						"fields":{
+							"name": "baseData.name"
+						}
 					}
 				},
 				"stateOfClub": {
@@ -146,9 +150,11 @@
 				"higherAssociation": {
 					"title": "Nadradený zväz",
 					"transCode": "schema.org.assoc.higherAssociation",
-					"objectLink": {
-						"registry": "organizations",
-						"name": "association.associationName"
+					"objectLink2": {
+						"schema":"uri://registries/organizations#views/association/view",
+						"fields":{
+							"name": "association.associationName"
+						}
 					}
 				},
 				"startDate": {
@@ -521,7 +527,7 @@
 						"transCode": "schema.org.club.name"
 					},
 					{
-						"field": "club.association.refData.name",
+						"field": "club.association",
 						"title": "Zväz",
 						"transCode": "schema.org.club.association"
 					},

@@ -17,9 +17,11 @@
 				"season": {
 					"title": "Súťažný ročnik",
 					"transCode":"schema.competition.season",
-					"objectLink": {
-						"registry": "seasons",
-						"name": "baseData.name"
+					"objectLink2": {
+						"schema":"uri://registries/seasons#views/seasons/view",
+						"fields":{
+							"name": "baseData.name"
+						}
 					},
 					"required": true
 				},
@@ -27,9 +29,11 @@
 					"title": "Veková kategória",
 					"transCode":"schema.competition.ageCategory",
 					"type": "object",
-					"objectLink": {
-						"registry": "ageCategories",
-						"name": "baseData.name"
+					"objectLink2": {
+						"schema":"uri://registries/ageCategory#views/ageCategory/view",
+						"fields":{
+							"name": "baseData.name"
+						}
 					},
 					"required": true
 				},
@@ -37,13 +41,12 @@
 					"extends":"uri://registries/commonenums#blocks/gender",
 					"title": "Pohlavie",
 					"transCode": "schema.people.gender",
-					"type": " string",
 					"required": true
 				},
 				"competitionLevel": {
 					"title": "Úroveň súťaže",
 					"transCode":"schema.competition.competitionLevel",
-					"type": "integer"
+					"type": "number"
 				}
 			}
 		}
@@ -57,17 +60,17 @@
 			"security": {
 				"create": {
 					"static": [
-						"Security - write"
+						"Registry - write"
 					]
 				},
 				"read": {
 					"static": [
-						"Security - read"
+						"Registry - read"
 					]
 				},
 				"modify": {
 					"static": [
-						"Security - write"
+						"Registry - write"
 					]
 				}
 			},
@@ -100,12 +103,12 @@
 						"transCode": "schema.competition.name"
 					},
 					{
-						"field": "baseData.season.refData.name",
+						"field": "baseData.season",
 						"title": "Súťažný ročník",
 						"transCode": "schema.competition.season"
 					},
 					{
-						"field": "baseData.ageCategory.refData.name",
+						"field": "baseData.ageCategory",
 						"title": "Veková kategória",
 						"transCode": "schema.competition.ageCategory"
 					},
