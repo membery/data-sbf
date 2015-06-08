@@ -1,4 +1,5 @@
-angular.module('registries')
+(function(angular) {
+angular.module('x-registries')
 .config(['$translateProvider', function($translateProvider) {
 	$translateProvider.preferredLanguage('sk');
 	$translateProvider.translations('sk', {
@@ -772,3 +773,4 @@ angular.module('registries')
 		"schema.nomination.state":"Stav"
 	});
 }]);
+}(angular));
