@@ -6,17 +6,17 @@
 		"security": {
 			"create": {
 				"static": [
-					"Security - write"
+					"Portal - write"
 				]
 			},
 			"read": {
 				"static": [
-					"Security - read"
+					"Portal - read"
 				]
 			},
 			"modify": {
 				"static": [
-					"Security - write"
+					"Portal - write"
 				]
 			}
 		},
