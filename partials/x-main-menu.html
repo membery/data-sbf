@@ -27,12 +27,12 @@
 			<li><a href="#/registry/search/{{'uri://registries/organizations#views/association/search'|xpsuiuriescape}}"><span>{{'menu.search.lower.level' | translate}}</span></a></li>
 		</ul>
 	</li>
-	<li ng-show="hasPermissions(['Registry - read'])"><a href="#" class="x-submenu-toggle"><i class="icon-forward fa-2x"></i><span>{{'menu.transfer.title' | translate}}</span></a>
+	<!-- <li ng-show="hasPermissions(['Registry - read'])"><a href="#" class="x-submenu-toggle"><i class="icon-forward fa-2x"></i><span>{{'menu.transfer.title' | translate}}</span></a>
 		<ul>
 			<li ng-show="hasPermissions(['Registry - write'])"><a href="#/registry/new/{{'uri://registries/transfers#views/transfers'|xpsuiuriescape}}"><span>{{'menu.new.lower.level.she' | translate}}</span></a></li>
 			<li><a href="#/registry/search/{{'uri://registries/transfers#views/transfers/search'|xpsuiuriescape}}"><span>{{'menu.search.lower.level' | translate}}</span></a></li>
 		</ul>
-	</li>
+	</li> -->
 	<li ng-show="hasPermissions(['Registry - read'])"><a href="#" class="x-submenu-toggle"><i class="icon-sheet-list fa-2x"></i><span>{{'menu.roster.title' | translate}}</span></a>
 		<ul>
 			<li ng-show="hasPermissions(['Registry - write'])"><a href="#/registry/new/{{'uri://registries/rosters#views/rosters'|xpsuiuriescape}}"><span>{{'menu.new.lower.level.she' | translate}}</span></a></li>

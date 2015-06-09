@@ -510,7 +510,7 @@ angular.module('x-registries')
 		"schema.people.surName": "Priezvisko",
 		"schema.people.state.of.person":"Stav osoby",
 		"schema.people.baseData.town":"Obec",
-		"schema.people.baseData.nationality":"Štátna príslušnosť",
+		"schema.people.baseData.nationality":"Štát",
 		"schema.people.profile.yes":"Áno",
 		"schema.people.profile.no":"Nie",
 		"schema.people.state.of.person.active":"Aktívna",

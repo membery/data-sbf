@@ -85,6 +85,9 @@
 					"extends": "uri://registries/commontypes#blocks/date",
 					"title": "Dátum registrácie",
 					"transCode": "schema.org.club.dateOfRegistration"
+				},
+				"nationality": {
+					"$ref": "uri://registries/countries#country"
 				}
 			}
 		},
@@ -126,7 +129,7 @@
 					"transCode": "schema.org.club.region",
 					"type": "string"
 				},
-				"country": {
+				"nationality": {
 					"$ref": "uri://registries/countries#country"
 				}
 			}
@@ -517,6 +520,15 @@
 			},
 			"search": {
 				"extends": "uri://registries/organizations#models/club",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fclub/{{model.id}}"
+						}
+					}
+				],
 				"properties": {
 					"logoInfo": null
 				},
@@ -579,6 +591,15 @@
 			},
 			"search": {
 				"extends": "uri://registries/organizations#models/association",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fassociation/{{model.id}}"
+						}
+					}
+				],
 				"properties": {
 					"logoInfo": null
 				},

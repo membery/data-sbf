@@ -11,9 +11,7 @@
 				"registrationID": {
 					"title": "Registračné číslo",
 					"transCode": "schema.people.registrationID",
-					"type": "number",
-					"required": true,
-					"sequence": "person_regs"
+					"type": "number"
 				},
 				"id": {
 					"title": "Identifikačné číslo",
@@ -854,6 +852,24 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/fullperson",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Ffullperson-km/{{model.id}}"
+						}
+					}
+				],
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Ffullperson/{{model.id}}"
+						}
+					}
+				],
 				"properties": {
 					"photoInfo":null
 				},
@@ -895,6 +911,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/coach",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Fcoach/{{model.id}}"
+						}
+					}
+				],
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -933,6 +958,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/referee",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Freferee/{{model.id}}"
+						}
+					}
+				],
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -971,6 +1005,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/officer",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Fofficer/{{model.id}}"
+						}
+					}
+				],
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -1009,6 +1052,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/medic",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Fmedic/{{model.id}}"
+						}
+					}
+				],
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -1043,6 +1095,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/statistic",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Fstatistic/{{model.id}}"
+						}
+					}
+				],
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -1087,6 +1148,15 @@
 			},
 			"search":{
 				"extends":"uri://registries/people#models/player",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Fpeople~23views~2Fplayer/{{model.id}}"
+						}
+					}
+				],
 				"title":"Hráč",
 				"listFields": [
 					{
