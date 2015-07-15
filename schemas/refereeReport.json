@@ -663,6 +663,11 @@
 						"field": "baseData.matchDate",
 						"title": "Termín stretnutia",
 						"transCode": "schema.refereeReport.baseData.matchDate"
+					},
+					{
+						"field": "baseData.matchRound",
+						"title": "Kolo",
+						"transCode": "schema.refereeReport.baseData.matchRound"
 					}
 				]
 			}

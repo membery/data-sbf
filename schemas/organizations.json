@@ -8,16 +8,61 @@
 			"type": "object",
 			"properties": {
 				"name": {
-					"title": "Obchodný názov spoločnosti",
+					"title": "Názov spoločnosti",
 					"transCode": "schema.org.name",
 					"type": "string",
 					"required": true
 				},
+				"startDate": {
+					"extends": "uri://registries/commontypes#blocks/date",
+					"title": "Dátum založenia",
+					"transCode": "schema.org.startDate"
+				},
+				"dateOfRegistration": {
+					"extends": "uri://registries/commontypes#blocks/date",
+					"title": "Dátum registrácie",
+					"transCode": "schema.org.dateOfRegistration"
+				},
 				"stateOfOrganization": {
-					"title": "Stav organizacie",
-					"transCode": "schema.org.stateOfOrganization",
+					"extends": "uri://registries/commonenums#blocks/active",
+					"title": "Stav klubu",
+					"transCode": "schema.org.club.stateOfClub",
 					"type": "string",
 					"required": true
+				}
+			}
+		},
+		"clubBaseball": {
+			"title": "Údaje klubu baseball",
+			"transCode": "schema.org.club.baseball",
+			"type": "object",
+			"properties": {
+				"isClubBaseball": {
+					"extends":"uri://registries/commonenums#blocks/boolean",
+					"title": "Je klub baseball",
+					"transCode": "schema.org.club.isClubBaseball"
+				},
+				"clubBaseballName": {
+					"title": "Názov klubu baseball",
+					"transCode": "schema.org.club.clubBaseballName",
+					"type": "string"
+				}
+			}
+		},
+		"clubSoftball": {
+			"title": "Údaje klubu softball",
+			"transCode": "schema.org.club.softball",
+			"type": "object",
+			"properties": {
+				"isClubSoftball": {
+					"extends":"uri://registries/commonenums#blocks/boolean",
+					"title": "Je klub softball",
+					"transCode": "schema.org.club.isClubSoftball"
+				},
+				"clubSoftballName": {
+					"title": "Názov klubu softball",
+					"transCode": "schema.org.club.clubSoftballName",
+					"type": "string"
 				}
 			}
 		},
@@ -135,53 +180,19 @@
 			}
 		},
 		"association": {
-			"title": "Základné údaje",
-			"transCode": "schema.org.baseData",
+			"title": "Údaje zväzu",
+			"transCode": "schema.org.association",
 			"type": "object",
 			"properties": {
+				"isAssociation": {
+					"extends":"uri://registries/commonenums#blocks/boolean",
+					"title": "Je zväz",
+					"transCode": "schema.org.assoc.isAssociaton"
+				},
 				"associationName": {
 					"title": "Názov zväzu",
 					"transCode": "schema.org.assoc.associationName",
-					"type": "string",
-					"required": true
-				},
-				"shortName": {
-					"title": "Skrátený názov zväzu",
-					"transCode": "schema.org.assoc.shortName",
 					"type": "string"
-				},
-				"higherAssociation": {
-					"title": "Nadradený zväz",
-					"transCode": "schema.org.assoc.higherAssociation",
-					"objectLink2": {
-						"schema":"uri://registries/organizations#views/association/view",
-						"fields":{
-							"name": "association.associationName"
-						}
-					}
-				},
-				"startDate": {
-					"extends": "uri://registries/commontypes#blocks/date",
-					"title": "Dátum založenia",
-					"transCode": "schema.org.assoc.startDate"
-				},
-				"stateOfAssociation": {
-					"extends": "uri://registries/commonenums#blocks/active",
-					"title": "Stav zväzu",
-					"transCode": "schema.org.assoc.stateOfAssociation",
-					"type": "string"
-				},
-				"notPaying": {
-					"extends": "uri://registries/commonenums#blocks/boolean",
-					"title": "Neplatič",
-					"transCode": "schema.org.assoc.notPaying",
-					"type": "string",
-					"required": true
-				},
-				"dateOfRegistration": {
-					"extends": "uri://registries/commontypes#blocks/date",
-					"title": "Dátum registrácie",
-					"transCode": "schema.org.assoc.dateOfRegistration"
 				}
 			}
 		},
@@ -242,17 +253,17 @@
 		},
 		"contactInfo": {
 			"title": "Kontaktné údaje",
-			"transCode": "schema.org.contactInfo",
+			"transCode": "schema.people.contactInfo",
 			"type": "object",
 			"properties": {
 				"street": {
 					"title": "Ulica",
-					"transCode": "schema.org.street",
+					"transCode": "schema.people.street",
 					"type": "string"
 				},
 				"houseNumber": {
 					"title": "Číslo domu",
-					"transCode": "schema.org.houseNumber",
+					"transCode": "schema.people.houseNumber",
 					"type": "string"
 				},
 				"city": {
@@ -260,35 +271,26 @@
 				},
 				"zipCode": {
 					"title": "PSČ",
-					"transCode": "schema.org.zipCode",
+					"transCode": "schema.people.zipCode",
 					"type": "string"
 				},
 				"country": {
-					"$ref": "uri://registries/countries#country"
+					"extends": "uri://registries/countries#country",
+					"transCode": "schema.people.country"
 				},
 				"phoneNumber": {
 					"title": "Telefón",
-					"transCode": "schema.org.phoneNumber",
+					"transCode": "schema.people.phoneNumber",
 					"type": "string"
 				},
 				"mobileNumber": {
 					"title": "Mobil",
-					"transCode": "schema.org.mobileNumber",
+					"transCode": "schema.people.mobileNumber",
 					"type": "string"
 				},
 				"email": {
 					"title": "E-mail",
-					"transCode": "schema.org.email",
-					"type": "string"
-				},
-				"fax": {
-					"title": "FAX",
-					"transCode": "schema.org.fax",
-					"type": "string"
-				},
-				"webPage": {
-					"title": "Webová stránka",
-					"transCode": "schema.org.webPage",
+					"transCode": "schema.people.email",
 					"type": "string"
 				}
 			}
@@ -298,11 +300,6 @@
 			"transCode": "schema.org.bankInfo",
 			"type": "object",
 			"properties": {
-				"statutarOrgan": {
-					"title": "Štatutárny orgán",
-					"transCode": "schema.org.statutarOrgan",
-					"type": "string"
-				},
 				"ico": {
 					"title": "IČO",
 					"transCode": "schema.org.ico",
@@ -314,11 +311,6 @@
 					"transCode": "schema.org.dic",
 					"type": "string"
 				},
-				"countryIcDPH": {
-					"title": "krajina IČ DPH",
-					"transCode": "schema.org.country.icDPH",
-					"type": "string"
-				},
 				"icDPH": {
 					"title": "IČ DPH",
 					"transCode": "schema.org.icDPH",
@@ -327,11 +319,6 @@
 				"bankAccount": {
 					"title": "Číslo účtu",
 					"transCode": "schema.org.bankAccount",
-					"type": "string"
-				},
-				"bankCode": {
-					"title": "Kód banky",
-					"transCode": "schema.org.bankCode",
 					"type": "string"
 				},
 				"bank": {
@@ -371,7 +358,21 @@
 					"required": true
 				},
 				"country": {
-					"$ref": "uri://registries/countries#country"
+					"extends": "uri://registries/countries#country",
+					"transCode": "schema.people.country"
+				}	
+			}
+		},
+		"otherInfo": {
+			"title": "Ostatné údaje",
+			"transCode": "schema.people.otherInfo",
+			"type": "object",
+			"properties": {
+				"note": {
+					"title": "Poznámka",
+					"transCode": "schema.people.note",
+					"type": "string",
+					"render":{"component":"psui-textarea"}
 				}
 			}
 		}
@@ -446,18 +447,6 @@
 				"baseData": {
 					"extends": "uri://registries/organizations#blocks/baseData"
 				},
-				"club": {
-					"extends": "uri://registries/organizations#blocks/club"
-				},
-				"clubAdress": {
-					"$ref": "uri://registries/organizations#blocks/clubAdress"
-				},
-				"association": {
-					"extends": "uri://registries/organizations#blocks/association"
-				},
-				"associationAdress": {
-					"$ref": "uri://registries/organizations#blocks/associationAdress"
-				},
 				"logoInfo": {
 					"$ref": "uri://registries/organizations#blocks/logoInfo"
 				},
@@ -466,6 +455,18 @@
 				},
 				"bankInfo": {
 					"$ref": "uri://registries/organizations#blocks/bankInfo"
+				},
+				"otherInfo": {
+					"$ref": "uri://registries/organizations#blocks/otherInfo"
+				},
+				"clubBaseball": {
+					"$ref": "uri://registries/organizations#blocks/clubBaseball"
+				},
+				"clubSoftball": {
+					"$ref": "uri://registries/organizations#blocks/clubSoftball"
+				},
+				"association": {
+					"$ref": "uri://registries/organizations#blocks/association"
 				}
 			}
 		},
