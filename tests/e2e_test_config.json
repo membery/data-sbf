@@ -1,0 +1,106 @@
+{
+	"schemas": {
+		"people": {
+			"new": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fpeople~23views~2Ffullperson~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fpeople~23views~2Ffullperson~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 0,
+			"createNo": 0,
+			"findNo": 1,
+			"dependencies": ["organizations:clubSoftball"]
+		},
+		"organizations": {
+			"new": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fcompany~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fcompany~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 1,
+			"createNo": 0,
+			"findNo": 1,
+			"dependencies": []
+		},
+		"stadium": {
+			"new": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fstadiums~23views~2Fstadium~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fstadiums~23views~2Fstadium~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 2,
+			"createNo": 0,
+			"findNo": 1,
+			"dependencies": []
+		},
+		"rosters":{
+			"new":"http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Frosters~23views~2Frosters~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Frosters~23views~2Frosters~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 3,
+			"createNo": 0,
+			"findNo": 1,
+			"dependencies": ["organizations:clubSoftball","seasons","category","competitions","people:coachBaseball","people:playerBaseball"]
+		},
+		"competitions": {
+			"new":"http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fcompetitions~23views~2Fcompetitions~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fcompetitions~23views~2Fcompetitions~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 4,
+			"createNo": 0,
+			"findNo": 1,
+			"dependencies": ["category","seasons"]
+		},
+		"competitionsPart": {
+			"new":"http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FcompetitionPart~23views~2FcompetitionPart~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FcompetitionPart~23views~2FcompetitionPart~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 4,
+			"createNo": 2,
+			"findNo": 3,
+			"dependencies": ["organizations:clubSoftball","seasons","category","competitions","rosters"]
+		},
+		"schedule": {
+			"new": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fschedule~23views~2Fschedule~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fschedule~23views~2Fschedule~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 4,
+			"createNo": 4,
+			"findNo": 5,
+			"dependencies": ["competitionsPart"]
+		},
+		"seasons":{
+			"new":"http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fseasons~23views~2Fseasons~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2Fseasons~23views~2Fseasons~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 6,
+			"createNo": 10,
+			"findNo": 11,
+			"dependencies": []
+		},
+		"category": {
+			"new":"http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FageCategory~23views~2FageCategory~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FageCategory~23views~2FageCategory~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 6,
+			"createNo": 12,
+			"findNo": 13,
+			"dependencies": []
+		}
+	},
+	"notUsed": {
+		"refereeReport": {
+			"new": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FrefereeReports~23views~2FrefereeReports~2Fnew",
+			"search": "http://localhost:3000/schema/compiled/uri~3A~2F~2Fregistries~2FrefereeReports~23views~2FrefereeReports~2Fsearch",
+			"newSchema": "",
+			"searchSchema":"",
+			"listNo": 4,
+			"createNo": 6,
+			"findNo": 7,
+			"dependencies": ["competitions","competitionsPart","rosters","category"]
+		}
+	}
+}
