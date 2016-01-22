@@ -3,24 +3,24 @@
 	"id": "uri://registries/rosters#",
 	"blocks": {
 		"baseData": {
+			"type": "object",
 			"title": "Základné údaje",
 			"transCode": "schema.roster.baseData",
-			"type": "object",
 			"properties": {
 				"prName": {
+					"type": "string",
 					"title": "Názov družstva",
 					"transCode": "schema.roster.prName",
-					"type": "string",
 					"required": true
 				},
 				"club": {
+					"type": "object",
 					"title": "Klub",
 					"transCode": "schema.roster.club",
-					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/organizations#views/club/view",
+						"schema": "uri://registries/organizations#views/company/view",
 						"fields": {
-							"name": "club.name"
+							"name": "baseData.name"
 						}
 					},
 					"required": true
@@ -44,9 +44,9 @@
 					"required": true
 				},
 				"ageCategory": {
+					"type": "object",
 					"title": "Veková kategória",
 					"transCode": "schema.roster.ageCategory",
-					"type": "object",
 					"objectLink2": {
 						"schema": "uri://registries/ageCategory#views/ageCategory/view",
 						"fields": {
@@ -68,9 +68,9 @@
 					}
 				},
 				"lastModification": {
+					"type": "string",
 					"title": "Dátum poslednej zmeny",
 					"transCode": "schema.roster.lastModification",
-					"type": "string",
 					"readOnly": true,
 					"timestamp": true
 				}
@@ -86,7 +86,7 @@
 					"transCode": "schema.roster.coach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -100,7 +100,7 @@
 					"transCode": "schema.roster.aCoach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -114,7 +114,7 @@
 					"transCode": "schema.roster.aCoach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -128,7 +128,7 @@
 					"transCode": "schema.roster.aCoach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -142,7 +142,7 @@
 					"transCode": "schema.roster.aCoach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -156,7 +156,7 @@
 					"transCode": "schema.roster.aCoach",
 					"type": "object",
 					"objectLink2": {
-						"schema": "uri://registries/people#views/coach/view",
+						"schema": "uri://registries/people#views/fullperson/view",
 						"fields": {
 							"surName": "baseData.surName",
 							"firstName": "baseData.name",
@@ -180,15 +180,41 @@
 					"transCode": "schema.roster.players",
 					"type": "array",
 					"items": {
-						"objectLink2": {
-							"schema": "uri://registries/people#views/player/view",
-							"fields": {
-								"surName": "baseData.surName",
-								"firstName": "baseData.name",
-								"birthDate": "baseData.birthDate"
+						"player": {
+							"title": "Hráč",
+							"transCode": "schema.roster.players",
+							"type": "object",
+							"render": {
+								"width": "wide"
+							},
+							"objectLink2": {
+								"schema": "uri://registries/people#views/fullperson/view",
+								"fields": {
+									"surName": "baseData.surName",
+									"firstName": "baseData.name",
+									"registrationID": "baseData.registrationID"
+								},
+								"calculatedCriteria": {
+									"func": "criteriaList",
+									"watch": ["baseData.club.oid"],
+									"args": [{
+										"func": "criterion",
+										"args": {
+											"f": "player.club.oid",
+											"op": "eq",
+											"v": {
+												"func": "get",
+												"args": {
+													"modelPath": "baseData.club.oid",
+													"default": null
+												}
+											},
+											"nullIfEmpty": true
+										}
+									}]
+								}
 							}
-						},
-						"required": true
+						}
 					}
 				}
 			}

@@ -16,6 +16,16 @@
 				"type": "boolean",
 				"default": true
 			},
+			"SOFTBALL": {
+				"title": "Systémový administátor",
+				"type": "boolean",
+				"default": true
+			},
+			"BASEBALL": {
+				"title": "Systémový administátor",
+				"type": "boolean",
+				"default": true
+			},
 
 
 			"Registry People": {
@@ -23,12 +33,27 @@
 				"type": "boolean",
 				"default": true
 			},
-			"Registry Club": {
+			"Registry Organization": {
 				"title": "Zobrazenie registru Cluby",
 				"type": "boolean",
 				"default": true
 			},
-			"Registry Requisitions": {
+			"Registry Stadium": {
+				"title": "Zobrazenie registru stadiony",
+				"type": "boolean",
+				"default": true
+			},
+			"Registry Roster": {
+				"title": "Zobrazenie registru druzstva",
+				"type": "boolean",
+				"default": true
+			},
+			"Registry Requests Solver": {
+				"title": "Riešenie žiadosti",
+				"type": "boolean",
+				"default": true
+			},
+			"Registry Requests": {
 				"title": "Zobrazenie registru Žiadosti",
 				"type": "boolean",
 				"default": true
@@ -40,6 +65,16 @@
 			},
 
 
+			"Person - read - KM": {
+				"title": "Zobrazenie dát osob pre KM",
+				"type": "boolean",
+				"default": true
+			},
+			"Person - write - KM": {
+				"title": "Modifikácia dát osob pre KM",
+				"type": "boolean",
+				"default": true
+			},
 			"RefereeReport - read - KM": {
 				"title": "Zobrazenie dát Zapisu rozhodcu",
 				"type": "boolean",
@@ -70,12 +105,12 @@
 				"type": "boolean",
 				"default": true
 			},
-			"Requisitions - read - KM": {
+			"Requests - read - KM": {
 				"title": "Zobrazenie dát žiadosti",
 				"type": "boolean",
 				"default": true
 			},
-			"Requisitions - write - KM": {
+			"Requests - write - KM": {
 				"title": "Modifikácia dát žiadosti",
 				"type": "boolean",
 				"default": true
@@ -89,6 +124,26 @@
 			},
 			"Registry - write": {
 				"title": "Modifikácia dát registrov",
+				"type": "boolean",
+				"default": true
+			},
+			"Club - read": {
+				"title": "Zobrazenie dát klubov",
+				"type": "boolean",
+				"default": true
+			},
+			"Club - write": {
+				"title": "Modifikácia dát klubov",
+				"type": "boolean",
+				"default": true
+			},
+			"Stadium - read": {
+				"title": "Zobrazenie dát stadionov",
+				"type": "boolean",
+				"default": true
+			},
+			"Stadium - write": {
+				"title": "Modifikácia dát stadionov",
 				"type": "boolean",
 				"default": true
 			},
@@ -139,19 +194,13 @@
 			"groups": {
 				"type": "array",
 				"items": {
-					"type": "object",
-					"properties": {
-						"id": "string"
-					}
+					"id": "string"
 				}
 			},
 			"profiles": {
 				"type": "array",
 				"items": {
-					"type": "object",
-					"properties": {
-						"id": "string"
-					}
+					"id": "string"
 				}
 			}
 		}
@@ -206,39 +255,28 @@
 					"groups": {
 						"type": "array",
 						"items": {
-							"type": "object",
-							"properties": {
-								"id": "string"
-							}
+							"id": "string"
 						}
 					},
 					"forcedCriteria": {
 						"type": "array",
 						"items": {
-							"type": "object",
-							"properties": {
-								"applySchema": "String",
-								"criteria": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"f": "string",
-											"op": "string",
-											"v": "string",
-											"obj":{
-												"type":"object",
-												"properties":{
-													"refData": {
-														"type":"object",
-														"properties":{
-															"name":"string"
-														}
-													}
-												}
+							"applySchema": "string",
+							"crits": {
+								"type": "array",
+								"items": {
+									"f": "string",
+									"op": "string",
+									"v": "string",
+									"obj":{
+										"refData": {
+											"type":"object",
+											"properties":{
+												"name":"string"
 											}
 										}
-									}
+									},
+									"expr": "string"
 								}
 							}
 						}

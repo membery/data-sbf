@@ -1,0 +1,301 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "uri://registries/dataChangeRequests#",
+	"models": {
+		"dataChange-km": {
+			"title": "Žiadosť o zmena údajov",
+			"transCode": "schema.dataChangeRequests.title",
+			"table": "dataChangeRequests",
+			"security": {
+				"create": {
+					"static": [
+						"Requests - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Requests - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Requests - write - KM"
+					]
+				}
+			},
+			"fireEvents": {
+				"create": "event-data-request-created",
+				"update": "event-data-request-updated"
+			},
+			"properties": {
+				"peopleObjLink": {
+					"title": "Osoba",
+					"transCode": "schema.people.title",
+					"type": "object",
+					"properties": {
+						"people": {
+							"transCode": "schema.people.title",
+							"type": "object",
+							"required": true,
+							"objectLink2": {
+								"schema": "uri://registries/people#views/fullperson-km/view",
+								"fields": {
+									"surName": "baseData.surName",
+									"name": "baseData.name",
+									"playerLicense": "player.playerLicense"
+								},
+								"calculatedCriteria": {
+									"func": "criteriaList",
+									"watch": ["peopleObjLink.people.oid"],
+									"args": [{
+										"func": "criterion",
+										"args": {
+											"f": "player.club.oid",
+											"op": "eq",
+											"v": {
+												"func": "get",
+												"args": {
+													"userPath": "officer.club.oid",
+													"default": null
+												}
+											},
+											"nullIfEmpty": true
+										}
+									}]
+								}
+							}
+						},
+						"requestType": {
+							"title": "Typ žiadosti",
+							"transCode": "schema.dataChangeRequests.playerLicenseRequest",
+							"type": "string",
+							"required": true,
+							"enum": [
+								"ISSUE",
+								"REVOCATION",
+								"CHANGE",
+								"PROLONGATION",
+								"REISSUEDUPL"
+							],
+							"enumTransCodes":[
+								"schema.dataChangeRequests.playerLicenseRequest.issue",
+								"schema.dataChangeRequests.playerLicenseRequest.revocation",
+								"schema.dataChangeRequests.playerLicenseRequest.change",
+								"schema.dataChangeRequests.playerLicenseRequest.prolongation",
+								"schema.dataChangeRequests.playerLicenseRequest.reissuedupl"
+							],
+							"render": {
+								"component": "psui-selectbox",
+								"searchable": true
+							}
+						}
+					}
+				},
+				"baseData":{
+					"extends": "uri://registries/people#blocks/person",
+					"properties": {
+						"registrationID": null,
+						"id": {
+							"required": false,
+							"unique": null
+						},
+						"name": {
+							"required": false
+						},
+						"surName": {
+							"required": false
+						},
+						"birthDate": {
+							"required": false
+						},
+						"gender": {
+							"required": false
+						},
+						"titleBefore": null,
+						"nationality": {
+							"required": false
+						},
+						"stateofPerson": null
+					}
+				},
+				"photoInfo": {
+					"$ref": "uri://registries/people#blocks/photoInfo"
+				},
+				"otherInfo": {
+					"extends": "uri://registries/people#blocks/otherInfo",
+					"properties": {
+						"idCardNumber": null,
+						"passportNumber": null,
+						"language":null
+					}
+				},
+				"attachments": {
+					"$ref": "uri://registries/generalRequests#blocks/attachments"
+				},
+				"requestData": {
+					"extends": "uri://registries/generalRequests#blocks/requestData",
+					"properties":{
+						"subject": null,
+						"text": null,
+						"responseText": null,
+						"applicant": {
+							"readOnly": true
+						},
+						"clubApplicant": {
+							"readOnly": true
+						},
+						"assignedTo": {
+							"readOnly": true
+						},
+						"setupDate": {
+							"readOnly": true
+						},
+						"status": {
+							"readOnly": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"views": {
+		"dataChangeApplicant": {
+			"new" : {
+				"extends":"uri://registries/dataChangeRequests#models/dataChange-km",
+				"properties": {
+					"requestData": null
+				}
+			},
+			"view" : {
+				"$ref":"uri://registries/dataChangeRequests#models/dataChange-km"
+			},
+			"search" : {
+				"extends":"uri://registries/dataChangeRequests#models/dataChange-km",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FdataChangeRequests~23views~2FdataChangeApplicant/{{model.id}}"
+						}
+					}
+				],
+				"listFields": [
+					{
+						"field": "peopleObjLink.people",
+						"title": "Osoba",
+						"transCode": "schema.people.title"
+					},
+					{
+						"field": "requestData.applicant",
+						"title": "Žiadateľ",
+						"transCode": "schema.requests.basedata.applicant"
+					},
+					{
+						"field": "requestData.clubApplicant",
+						"title": "Klub",
+						"transCode": "schema.requests.basedata.clubApplicant"
+					},
+					{
+						"field": "requestData.status",
+						"title": "Stav",
+						"transCode": "schema.requests.basedata.status"
+					}
+				],
+				"properties": {
+					"photoInfo": null
+				}
+			}
+			
+		},
+		"dataChangeSolver": {
+			"view": {
+				"extends": "uri://registries/dataChangeRequests#models/dataChange-km",
+				"actions": [
+					{
+						"title": "Aplikovať zmeny",
+						"classes": "btn btn-primary",
+						"iconClasses": "fa fa-check-circle-o",
+						"func": "svfHack"
+					}
+				],
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"properties": {
+					"peopleObjLink": {
+						"properties": {
+							"people": {
+								"objectLink2": {
+									"schema": "uri://registries/people#views/fullperson/view"
+								}
+							}
+						}
+					},
+					"requestData": {
+						"properties":{
+							"status": {
+								"readOnly": false
+							},
+							"applicant": {
+								"readOnly": false
+							},
+							"clubApplicant": {
+								"readOnly": false
+							},
+							"assignedTo": {
+								"readOnly": false
+							},
+							"setupDate": {
+								"readOnly": false
+							}
+						}
+					}
+				}
+			},
+			"search": {
+				"extends": "uri://registries/dataChangeRequests#views/dataChangeApplicant/search",
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/2/registry/view/uri~3A~2F~2Fregistries~2FdataChangeRequests~23views~2FdataChangeSolver~2Fview/{{model.id}}"
+						}
+					}
+				]
+			}
+		}
+	}
+}

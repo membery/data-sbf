@@ -1,0 +1,187 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "uri://registries/stadiumRequests#",
+	"models": {
+		"stadiumRegistration": {
+			"extends": "uri://registries/stadiums#models/stadiums",
+			"title": "Žiadosť o registráciu športového objektu",
+			"transCode": "schema.stadiumRequests.title",
+			"table": "stadiumRequests",
+			"security": {
+				"create": {
+					"static": [
+						"Requests - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Requests - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Requests - write - KM"
+					]
+				}
+			},
+			"fireEvents": {
+				"create": "event-stadium-request-created",
+				"update": "event-stadium-request-updated"
+			},
+			"properties": {
+				"attachments": {
+					"$ref": "uri://registries/generalRequests#blocks/attachments"
+				},
+				"requestData": {
+					"extends": "uri://registries/generalRequests#blocks/requestData",
+					"properties":{
+						"subject": null,
+						"text": null,
+						"responseText": null,
+						"applicant": {
+							"readOnly": true
+						},
+						"clubApplicant": {
+							"readOnly": true
+						},
+						"assignedTo": {
+							"readOnly": true
+						},
+						"setupDate": {
+							"readOnly": true
+						},
+						"status": {
+							"readOnly": true
+						}
+					}
+				}
+			}
+		}
+	},
+	"views": {
+		"stadiumRegistrationApplicant": {
+			"new": {
+				"extends": "uri://registries/stadiumRequests#models/stadiumRegistration",
+				"properties": {
+					"requestData": null
+				}
+			},
+			"view": {
+				"$ref": "uri://registries/stadiumRequests#models/stadiumRegistration"
+			},
+			"search": {
+				"extends": "uri://registries/stadiumRequests#models/stadiumRegistration",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FstadiumRequests~23views~2FstadiumRegistrationApplicant/{{model.id}}"
+						}
+					}
+				],
+				"properties": {
+					"photoInfo": null
+				},
+				"listFields": [
+					{
+						"field": "baseData.name",
+						"title": "Názov",
+						"transCode": "schema.stadium.name"
+					},
+					{
+						"field": "baseData.town",
+						"title": "Mesto",
+						"transCode": "schema.towns.town"
+					},
+					{
+						"field": "requestData.clubApplicant",
+						"title": "Klub",
+						"transCode": "schema.requests.basedata.clubApplicant"
+					},
+					{
+						"field": "requestData.applicant",
+						"title": "Žiadateľ",
+						"transCode": "schema.requests.basedata.applicant"
+					},
+					{
+						"field": "requestData.status",
+						"title": "Stav",
+						"transCode": "schema.requests.basedata.status"
+					}
+				]
+			}
+		},
+		"stadiumRegistrationSolver": {
+			"view": {
+				"extends": "uri://registries/stadiumRequests#models/stadiumRegistration",
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "action-link",
+						"title": "Vytvoriť štadión",
+						"schema": "uri://registries/stadiums#views/stadium",
+						"template": "createStadium.html"
+					}
+				],
+				"properties": {
+					"requestData": {
+						"properties":{
+							"assignedTo": {
+								"readOnly": false
+							},
+							"status": {
+								"readOnly": false
+							}
+						}
+					}
+				}
+			},
+			"search": {
+				"extends": "uri://registries/stadiumRequests#views/stadiumRegistrationApplicant/search",
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FstadiumRequests~23views~2FstadiumRegistrationSolver/{{model.id}}"
+						}
+					}
+				]
+			}
+		}
+	}
+}

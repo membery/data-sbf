@@ -8,7 +8,7 @@
 			"type": "object",
 			"properties": {
 				"name": {
-					"title": "Názov spoločnosti",
+					"title": "Názov organizácie",
 					"transCode": "schema.org.name",
 					"type": "string",
 					"required": true
@@ -25,8 +25,8 @@
 				},
 				"stateOfOrganization": {
 					"extends": "uri://registries/commonenums#blocks/active",
-					"title": "Stav klubu",
-					"transCode": "schema.org.club.stateOfClub",
+					"title": "Stav organizácie",
+					"transCode": "schema.org.stateOfOrganization",
 					"type": "string",
 					"required": true
 				}
@@ -63,76 +63,6 @@
 					"title": "Názov klubu softball",
 					"transCode": "schema.org.club.clubSoftballName",
 					"type": "string"
-				}
-			}
-		},
-		"club": {
-			"title": "Základné údaje",
-			"transCode": "schema.org.baseData",
-			"type": "object",
-			"properties": {
-				"codeOfClub": {
-					"title": "Kód klubu",
-					"transCode": "schema.org.club.codeOfClub",
-					"type": "string",
-					"sequence": "clubs"
-				},
-				"name": {
-					"title": "Názov klubu",
-					"transCode": "schema.org.club.name",
-					"type": "string",
-					"required": true,
-					"collate": true
-				},
-				"association": {
-					"title": "Zväz",
-					"transCode": "schema.org.club.association",
-					"objectLink2": {
-						"schema":"uri://registries/organizations#views/association/view",
-						"fields":{
-							"name": "association.associationName"
-						}
-					}
-				},
-				"ico": {
-					"title": "IČO",
-					"transCode": "schema.org.ico",
-					"type": "string"
-				},
-				"startDate": {
-					"extends": "uri://registries/commontypes#blocks/date",
-					"title": "Dátum založenia",
-					"transCode": "schema.org.club.startDate"
-				},
-				"stadium": {
-					"title": "Štadión",
-					"transCode": "schema.org.club.stadium",
-					"objectLink2": {
-						"schema":"uri://registries/stadiums#views/stadium/view",
-						"fields":{
-							"name": "baseData.name"
-						}
-					}
-				},
-				"stateOfClub": {
-					"extends": "uri://registries/commonenums#blocks/active",
-					"title": "Stav klubu",
-					"transCode": "schema.org.club.stateOfClub",
-					"type": "string"
-				},
-				"notPaying": {
-					"extends": "uri://registries/commonenums#blocks/boolean",
-					"title": "Neplatič",
-					"transCode": "schema.org.club.notPaying",
-					"type": "string"
-				},
-				"dateOfRegistration": {
-					"extends": "uri://registries/commontypes#blocks/date",
-					"title": "Dátum registrácie",
-					"transCode": "schema.org.club.dateOfRegistration"
-				},
-				"nationality": {
-					"$ref": "uri://registries/countries#country"
 				}
 			}
 		},
@@ -378,54 +308,10 @@
 		}
 	},
 	"models": {
-		"club": {
-			"table": "organizations",
-			"title": "Klub",
-			"transCode": "schema.club.title",
-			"security": {
-				"create": {
-					"static": [
-						"Registry - write"
-					]
-				},
-				"read": {
-					"static": [
-						"Registry - read"
-					]
-				},
-				"modify": {
-					"static": [
-						"Registry - write"
-					]
-				}
-			},
-			"forcedCriteria": [
-				{
-					"f": "club",
-					"op": "ex",
-					"v": ""
-				}
-			],
-			"fireEvents": {
-				"create": "event-agecategory-created",
-				"update": "event-agecategory-updated"
-			},
-			"properties": {
-				"club": {
-					"extends": "uri://registries/organizations#blocks/club"
-				},
-				"logoInfo": {
-					"$ref": "uri://registries/organizations#blocks/logoInfo"
-				},
-				"clubAdress": {
-					"$ref": "uri://registries/organizations#blocks/clubAdress"
-				}
-			}
-		},
 		"company": {
 			"table": "organizations",
 			"title": "Organizácia",
-			"xxtransCode": "schema.org.title",
+			"transCode": "schema.org.title",
 			"security": {
 				"create": {
 					"static": [
@@ -456,9 +342,6 @@
 				"bankInfo": {
 					"$ref": "uri://registries/organizations#blocks/bankInfo"
 				},
-				"otherInfo": {
-					"$ref": "uri://registries/organizations#blocks/otherInfo"
-				},
 				"clubBaseball": {
 					"$ref": "uri://registries/organizations#blocks/clubBaseball"
 				},
@@ -467,13 +350,43 @@
 				},
 				"association": {
 					"$ref": "uri://registries/organizations#blocks/association"
+				},
+				"otherInfo": {
+					"$ref": "uri://registries/organizations#blocks/otherInfo"
 				}
 			}
 		},
-		"association": {
+		"company-km": {
+			"extends": "uri://registries/organizations#models/company",
+			"security": {
+				"create": {
+					"static": [
+						"Club - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Club - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Club - write - KM"
+					]
+				}
+			},
+			"forcedCriteria": [
+				{
+					"f": "_id",
+					"op": "eq",
+					"v": "officerBaseball.club.oid"
+				}
+			]
+		},
+		"clubBaseball": {
 			"table": "organizations",
-			"title": "Zväzy",
-			"transCode": "schema.association.title",
+			"title": "Organizácia",
+			"transCode": "schema.org.title",
 			"security": {
 				"create": {
 					"static": [
@@ -493,75 +406,166 @@
 			},
 			"forcedCriteria": [
 				{
-					"f": "association",
-					"op": "ex",
-					"v": ""
+					"f": "clubBaseball.isClubBaseball",
+					"op": "eq",
+					"v": "TRUE"
 				}
 			],
 			"properties": {
-				"association": {
-					"extends": "uri://registries/organizations#blocks/association"
+				"baseData": {
+					"$ref": "uri://registries/organizations#blocks/baseData"
+				},
+				"clubBaseball": {
+					"$ref": "uri://registries/organizations#blocks/clubBaseball"
 				},
 				"logoInfo": {
 					"$ref": "uri://registries/organizations#blocks/logoInfo"
 				},
-				"associationAdress": {
-					"$ref": "uri://registries/organizations#blocks/associationAdress"
+				"contactInfo": {
+					"$ref": "uri://registries/organizations#blocks/contactInfo"
+				}
+			}
+		},
+		"clubBaseball-km": {
+			"extends": "uri://registries/organizations#models/clubBaseball",
+			"security": {
+				"create": {
+					"static": [
+						"Club - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Club - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Club - write - KM"
+					]
+				}
+			}
+		},
+		"clubSoftball": {
+			"table": "organizations",
+			"title": "Organizácia",
+			"transCode": "schema.org.title",
+			"security": {
+				"create": {
+					"static": [
+						"Registry - write"
+					]
+				},
+				"read": {
+					"static": [
+						"Registry - read"
+					]
+				},
+				"modify": {
+					"static": [
+						"Registry - write"
+					]
+				}
+			},
+			"forcedCriteria": [
+				{
+					"f": "clubSoftball.isClubSoftball",
+					"op": "eq",
+					"v": "TRUE"
+				}
+			],
+			"properties": {
+				"baseData": {
+					"$ref": "uri://registries/organizations#blocks/baseData"
+				},
+				"clubSoftball": {
+					"$ref": "uri://registries/organizations#blocks/clubSoftball"
+				},
+				"logoInfo": {
+					"$ref": "uri://registries/organizations#blocks/logoInfo"
+				},
+				"contactInfo": {
+					"$ref": "uri://registries/organizations#blocks/contactInfo"
+				}
+			}
+		},
+		"clubSoftball-km": {
+			"extends": "uri://registries/organizations#models/clubSoftball",
+			"security": {
+				"create": {
+					"static": [
+						"Club - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Club - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Club - write - KM"
+					]
+				}
+			}
+		},
+		"association": {
+			"table": "organizations",
+			"security": {
+				"create": {
+					"static": [
+						"Registry - write"
+					]
+				},
+				"read": {
+					"static": [
+						"Registry - read"
+					]
+				},
+				"modify": {
+					"static": [
+						"Registry - write"
+					]
+				}
+			},
+			"forcedCriteria": [
+				{
+					"f": "association.isAssociation",
+					"op": "eq",
+					"v": "TRUE"
+				}
+			],
+			"properties": {
+				"baseData": {
+					"$ref": "uri://registries/organizations#blocks/baseData"
+				},
+				"association": {
+					"$ref": "uri://registries/organizations#blocks/association"
+				}
+			}
+		},
+		"association-km": {
+			"extends": "uri://registries/organizations#models/association",
+			"security": {
+				"create": {
+					"static": [
+						"Club - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Club - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Club - write - KM"
+					]
 				}
 			}
 		}
 	},
 	"views": {
-		"club": {
-			"new": {
-				"extends": "uri://registries/organizations#models/club"
-			},
-			"view": {
-				"extends": "uri://registries/organizations#models/club"
-			},
-			"search": {
-				"extends": "uri://registries/organizations#models/club",
-				"clientActions": [
-					{
-						"__DIRECTIVE__": "schema-redirect-link",
-						"title": "Zobraziť",
-						"params": {
-							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fclub/{{model.id}}"
-						}
-					}
-				],
-				"properties": {
-					"logoInfo": null
-				},
-				"listFields": [
-					{
-						"field": "club.name",
-						"title": "Názov klubu",
-						"transCode": "schema.org.club.name"
-					},
-					{
-						"field": "club.association",
-						"title": "Zväz",
-						"transCode": "schema.org.club.association"
-					},
-					{
-						"field": "clubAdress.city",
-						"title": "Mesto",
-						"transCode": "schema.towns.town"
-					},
-					{
-						"field": "club.stateOfClub",
-						"title": "Stav klubu",
-						"transCode": "schema.org.club.stateOfClub"
-					},
-					{
-						"field": "club.notPaying",
-						"title": "Neplatič",
-						"transCode": "schema.org.club.notPaying"
-					}
-				]
-			}
-		},
 		"company": {
 			"new": {
 				"extends": "uri://registries/organizations#models/company"
@@ -571,33 +575,12 @@
 			},
 			"search": {
 				"extends": "uri://registries/organizations#models/company",
-				"listFields": [
-					{
-						"field": "club.codeOfClub",
-						"title": "Klub ID"
-					},
-					{
-						"field": "club.name",
-						"title": "Názov klubu"
-					}
-				]
-			}
-		},
-		"association": {
-			"new": {
-				"extends": "uri://registries/organizations#models/association"
-			},
-			"view": {
-				"extends": "uri://registries/organizations#models/association"
-			},
-			"search": {
-				"extends": "uri://registries/organizations#models/association",
 				"clientActions": [
 					{
 						"__DIRECTIVE__": "schema-redirect-link",
 						"title": "Zobraziť",
 						"params": {
-							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fassociation/{{model.id}}"
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fcompany/{{model.id}}"
 						}
 					}
 				],
@@ -606,26 +589,152 @@
 				},
 				"listFields": [
 					{
-						"field": "association.associationName",
-						"title": "Názov zväzu",
-						"transCode": "schema.org.assoc.associationName"
+						"field": "baseData.name",
+						"title": "Názov",
+						"transCode": "schema.org.name"
 					},
 					{
-						"field": "associationAdress.city",
-						"title": "Mesto",
-						"transCode": "schema.towns.town"
+						"field": "clubBaseball.isClubBaseball",
+						"title": "Basebal",
+						"transCode": "schema.org.club.isClubBaseball"
 					},
 					{
-						"field": "association.stateOfAssociation",
-						"title": "Stav zväzu",
-						"transCode": "schema.org.assoc.stateOfAssociation"
+						"field": "clubSoftball.isClubSoftball",
+						"title": "Basebal",
+						"transCode": "schema.org.club.isClubSoftball"
 					},
 					{
-						"field": "association.notPaying",
-						"title": "Neplatič",
-						"transCode": "schema.org.assoc.notPaying"
+						"field": "association.isAssociation",
+						"title": "Basebal",
+						"transCode": "schema.org.assoc.isAssociation"
+					},
+					{
+						"field": "baseData.stateOfOrganization",
+						"title": "Stav",
+						"transCode": "schema.org.stateOfOrganization"
 					}
 				]
+			}
+		},
+		"company-km": {
+			"view": {
+				"extends": "uri://registries/organizations#models/company-km"
+			},
+			"search": {
+				"extends": "uri://registries/organizations#models/company-km",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2Forganizations~23views~2Fcompany-km/{{model.id}}"
+						}
+					}
+				],
+				"properties": {
+					"logoInfo": null
+				},
+				"listFields": [
+					{
+						"field": "baseData.name",
+						"title": "Názov",
+						"transCode": "schema.org.name"
+					},
+					{
+						"field": "clubBaseball.isClubBaseball",
+						"title": "Basebal",
+						"transCode": "schema.org.club.isClubBaseball"
+					},
+					{
+						"field": "clubSoftball.isClubSoftball",
+						"title": "Basebal",
+						"transCode": "schema.org.club.isClubSoftball"
+					},
+					{
+						"field": "association.isAssociation",
+						"title": "Basebal",
+						"transCode": "schema.org.assoc.isAssociation"
+					},
+					{
+						"field": "baseData.stateOfOrganization",
+						"title": "Stav",
+						"transCode": "schema.org.stateOfOrganization"
+					}
+				]
+			}
+		},
+		"clubBaseball": {
+			"view": {
+				"$ref": "uri://registries/organizations#models/clubBaseball"
+			}
+		},
+		"clubBaseball-km": {
+			"view": {
+				"extends": "uri://registries/organizations#models/clubBaseball-km",
+				"properties": {
+					"baseData":{
+						"properties": {
+							"name":{
+								"readOnly": true
+							},
+							"stateOfOrganization":{
+								"readOnly": true
+							}
+						}
+					},
+					"clubBaseball":{
+						"properties": {
+							"isClubBaseball":{
+								"readOnly": true
+							},
+							"clubBaseballName":{
+								"readOnly": true
+							}
+						}
+					}
+				}
+			}
+		},
+		"clubSoftball": {
+			"view": {
+				"$ref": "uri://registries/organizations#models/clubSoftball"
+			}
+		},
+		"clubSoftball-km": {
+			"view": {
+				"extends": "uri://registries/organizations#models/clubSoftball-km",
+				"properties": {
+					"baseData":{
+						"properties": {
+							"name":{
+								"readOnly": true
+							},
+							"stateOfOrganization":{
+								"readOnly": true
+							}
+						}
+					},
+					"clubSoftball":{
+						"properties": {
+							"isClubSoftball":{
+								"readOnly": true
+							},
+							"clubSoftballName":{
+								"readOnly": true
+							}
+						}
+					}
+				}
+			}
+		},
+		"association": {
+			"view": {
+				"$ref": "uri://registries/organizations#models/association"
+			}
+		},
+		"association-km": {
+			"view": {
+				"$ref": "uri://registries/organizations#models/association-km"
 			}
 		}
 	}

@@ -17,6 +17,7 @@
 				"season": {
 					"title": "Súťažný ročnik",
 					"transCode":"schema.competition.season",
+					"type": "object",
 					"objectLink2": {
 						"schema":"uri://registries/seasons#views/seasons/view",
 						"fields":{
@@ -73,10 +74,6 @@
 						"Registry - write"
 					]
 				}
-			},
-			"fireEvents":{
-				"create": "event-transfer-created",
-				"update": "event-transfer-updated"
 			},
 			"properties":{
 				"baseData":{

@@ -18,7 +18,13 @@
 	"competitionPart.json",
 	"schedule.json",
 	"refereeReport.json",
-	"nomination.json",
 	"commonTypes.json",
-	"commonEnums.json"
+	"commonEnums.json",
+	"portalArticles.json",
+	"generalRequests.json",
+	"dataChangeRequests.json",
+	"registrationRequests.json",
+	"stadiumRequests.json",
+	"transferRequests.json",
+	"pastLogins.json"
 ]

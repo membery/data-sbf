@@ -63,8 +63,8 @@
 					"transCode":"schema.stadium.surface",
 					"type": "string",
 					"enum":[
-						"prírodný",
-						"umelý"
+						"NATURAL",
+						"ARTIFICIAL"
 					],
 					"enumTransCodes":[
 						"schema.stadium.surface.natural",
@@ -78,7 +78,7 @@
 				"overallCapacity": {
 					"title": "Celková kapacita",
 					"transCode":"schema.stadium.overallCapacity",
-					"type": "number"
+					"type": "string"
 				},
 				"manager": {
 					"title": "Manažér",

@@ -1,0 +1,571 @@
+{
+	"$schema": "http://json-schema.org/schema#",
+	"id": "uri://registries/registrationRequests#",
+	"models": {
+		"peopleRegistration": {
+			"extends": "uri://registries/people#models/fullperson-km",
+			"title": "Žiadosť o registráciu osoby",
+			"transCode": "schema.registrationRequests.title",
+			"table": "registrationRequests",
+			"security": {
+				"create": {
+					"static": [
+						"Requests - write - KM"
+					]
+				},
+				"read": {
+					"static": [
+						"Requests - read - KM"
+					]
+				},
+				"modify": {
+					"static": [
+						"Requests - write - KM"
+					]
+				}
+			},
+			"fireEvents": {
+				"create": "event-registration-request-created",
+				"update": "event-registration-request-updated"
+			},
+			"properties": {
+				"baseData": {
+					"properties": {
+						"id": {
+							"unique": {
+								"schema": "uri://registries/people#views/fullperson-km",
+								"field": "baseData.id"
+							}
+						},
+						"registrationID": null
+					}
+				},
+				"otherInfo": {
+					"properties": {
+						"language": null
+					}
+				},
+				"attachments": {
+					"$ref": "uri://registries/generalRequests#blocks/attachments"
+				},
+				"requestData": {
+					"extends": "uri://registries/generalRequests#blocks/requestData",
+					"properties": {
+						"subject": null,
+						"text": null,
+						"responseText": null,
+						"applicant": {
+							"readOnly": true
+						},
+						"clubApplicant": {
+							"readOnly": true
+						},
+						"assignedTo": {
+							"readOnly": true
+						},
+						"setupDate": {
+							"readOnly": true
+						},
+						"status": {
+							"readOnly": true
+						}
+					}
+				},
+				"bankInfo": {
+					"properties":{
+						"street": {
+							"required": false
+						},
+						"houseNumber": {
+							"required": false
+						},
+						"zipCode": {
+							"required": false
+						},
+						"country": {
+							"required": false
+						}
+					}
+				},
+				"idInfo": null
+			}
+		}
+	},
+	"views": {
+		"peopleRegistrationApplicantBaseball": {
+			"new": {
+				"extends": "uri://registries/registrationRequests#models/peopleRegistration",
+				"properties": {
+					"playerBaseball": {
+						"properties": {
+							"clubOfFirstRegistration": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubBaseball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerBaseball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerBaseball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							},
+							"club": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubBaseball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerBaseball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerBaseball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							}
+
+						}
+					},
+					"coachBaseball": {
+						"properties": {
+							"firstAssociation": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							},
+							"association": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							}
+						}
+					},
+					"refereeBaseball": {
+						"properties": {
+							"firstAssociation": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							},
+							"association": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							}
+						}
+					},
+					"scorerBaseball": {
+						"properties": {
+							"firstAssociation": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							},
+							"association": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							}
+						}
+					},
+					"officerBaseball": {
+						"properties": {
+							"association": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							},
+							"club": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubBaseball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerBaseball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerBaseball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							}
+						}
+					},
+					"officerSoftball": null,
+					"scorerSoftball": null,
+					"refereeSoftball": null,
+					"coachSoftball": null,
+					"playerSoftball": null
+				}
+			},
+			"view": {
+				"extends": "uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new",
+				"properties": {
+					"requestData": {
+						"properties": {
+							"clubApplicant":{
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/company-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"search": {
+				"extends": "uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FregistrationRequests~23views~2FpeopleRegistrationApplicantBaseball/{{model.id}}"
+						}
+					}
+				],
+				"properties": {
+					"photoInfo": null
+				},
+				"listFields": [
+					{
+						"field": "baseData.surName",
+						"title": "Priezvisko",
+						"transCode": "schema.people.surName"
+					},
+					{
+						"field": "baseData.name",
+						"title": "Meno",
+						"transCode": "schema.people.name"
+					},
+					{
+						"field": "baseData.birthDate",
+						"title": "Dátum narodenia",
+						"transCode": "schema.people.birthDate"
+					},
+					{
+						"field": "requestData.clubApplicant",
+						"title": "Klub",
+						"transCode": "schema.requests.basedata.clubApplicant"
+					},
+					{
+						"field": "requestData.applicant",
+						"title": "Žiadateľ",
+						"transCode": "schema.requests.basedata.applicant"
+					},
+					{
+						"field": "requestData.status",
+						"title": "Stav",
+						"transCode": "schema.requests.basedata.status"
+					}
+				]
+			}
+		},
+		"peopleRegistrationApplicantSoftball": {
+			"new": {
+				"extends": "uri://registries/registrationRequests#models/peopleRegistration",
+				"properties": {
+					"playerSoftball": {
+						"properties": {
+							"clubOfFirstRegistration": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubSoftball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerSoftball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerSoftball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							},
+							"club": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubSoftball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerSoftball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerSoftball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							}
+						}
+					},
+					"coachSoftball": {
+						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/coachBaseball"
+					},
+					"refereeSoftball": {
+						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/refereeBaseball"
+					},
+					"scorerSoftball": {
+						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/scorerBaseball"
+					},
+					"officerSoftball": {
+						"properties": {
+							"association": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/association-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							},
+							"club": {
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/clubSoftball-km/view",
+									"calculatedCriteria": {
+										"func": "criteriaList",
+										"watch": ["officerSoftball.club.oid"],
+										"args": [{
+											"func": "criterion",
+											"args": {
+												"f": "_id",
+												"op": "eq",
+												"v": {
+													"func": "get",
+													"args": {
+														"userPath": "officerSoftball.club.oid",
+														"default": null
+													}
+												},
+												"nullIfEmpty": true
+											}
+										}]
+									}
+								},
+								"required": false
+							}
+						}
+					},
+					"playerBaseball": null,
+					"coachBaseball": null,
+					"refereeBaseball": null,
+					"scorerBaseball": null,
+					"officerBaseball": null
+				}
+			},
+			"view": {
+				"extends": "uri://registries/registrationRequests#views/peopleRegistrationApplicantSoftball/new",
+				"properties": {
+					"requestData": {
+						"properties": {
+							"clubApplicant":{
+								"objectLink2": {
+									"schema": "uri://registries/organizations#views/company-km/view",
+									"fields": {
+										"name": "baseData.name"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"search": {
+				"extends": "uri://registries/registrationRequests#views/peopleRegistrationApplicantSoftball/new",
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FregistrationRequests~23views~2FpeopleRegistrationApplicantSoftball/{{model.id}}"
+						}
+					}
+				],
+				"properties": {
+					"photoInfo": null
+				},
+				"listFields": [
+					{
+						"field": "baseData.surName",
+						"title": "Priezvisko",
+						"transCode": "schema.people.surName"
+					},
+					{
+						"field": "baseData.name",
+						"title": "Meno",
+						"transCode": "schema.people.name"
+					},
+					{
+						"field": "baseData.birthDate",
+						"title": "Dátum narodenia",
+						"transCode": "schema.people.birthDate"
+					},
+					{
+						"field": "requestData.clubApplicant",
+						"title": "Klub",
+						"transCode": "schema.requests.basedata.clubApplicant"
+					},
+					{
+						"field": "requestData.applicant",
+						"title": "Žiadateľ",
+						"transCode": "schema.requests.basedata.applicant"
+					},
+					{
+						"field": "requestData.status",
+						"title": "Stav",
+						"transCode": "schema.requests.basedata.status"
+					}
+				]
+			}
+		},
+		"peopleRegistrationSolver": {
+			"view": {
+				"extends": "uri://registries/registrationRequests#models/peopleRegistration",
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "action-link",
+						"title": "Vytvoriť člena",
+						"schema": "uri://registries/people#views/fullperson",
+						"template": "createMember.html"
+					}
+				],
+				"properties": {
+					"requestData": {
+						"properties":{
+							"assignedTo": {
+								"readOnly": false
+							},
+							"status": {
+								"readOnly": false
+							}
+						}
+					}
+				}
+			},
+			"search": {
+				"extends": "uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/search",
+				"security": {
+					"create": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"read": {
+						"static": [
+							"Registry - read"
+						]
+					},
+					"modify": {
+						"static": [
+							"Registry - read"
+						]
+					}
+				},
+				"clientActions": [
+					{
+						"__DIRECTIVE__": "schema-redirect-link",
+						"title": "Zobraziť",
+						"params": {
+							"path": "/registry/view/uri~3A~2F~2Fregistries~2FregistrationRequests~23views~2FpeopleRegistrationSolver/{{model.id}}"
+						}
+					}
+				]
+			}
+		}
+	}
+}
