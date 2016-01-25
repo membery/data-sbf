@@ -584,7 +584,7 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/people#blocks/person"
+					"$ref":"uri://registries/people#blocks/person"
 				},
 				"photoInfo":{
 					"$ref":"uri://registries/people#blocks/photoInfo"
@@ -972,7 +972,7 @@
 				}
 			},
 			"view":{
-				"extends":"uri://registries/people#models/fullperson"
+				"$ref":"uri://registries/people#models/fullperson"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/fullperson",
@@ -1090,7 +1090,7 @@
 						}
 					},
 					"playerSoftball": {
-						"extends":"uri://registries/people#views/fullperson-km/view/properties/playerBaseball"	
+						"$ref":"uri://registries/people#views/fullperson-km/view/properties/playerBaseball"	
 					},
 					"officerBaseball": {
 						"properties": {
@@ -1127,7 +1127,7 @@
 						}
 					},
 					"officerSoftball": {
-						"extends":"uri://registries/people#views/fullperson-km/view/properties/officerBaseball"	
+						"$ref":"uri://registries/people#views/fullperson-km/view/properties/officerBaseball"	
 					},
 					"coachBaseball": {
 						"properties": {
@@ -1168,7 +1168,7 @@
 						}
 					},
 					"coachSoftball": {
-						"extends":"uri://registries/people#views/fullperson-km/view/properties/coachBaseball"	
+						"$ref":"uri://registries/people#views/fullperson-km/view/properties/coachBaseball"	
 					},
 					"refereeBaseball":{
 						"properties": {
@@ -1199,7 +1199,7 @@
 						}
 					},
 					"refereeSoftball": {
-						"extends":"uri://registries/people#views/fullperson-km/view/properties/refereeBaseball"	
+						"$ref":"uri://registries/people#views/fullperson-km/view/properties/refereeBaseball"	
 					},
 					"scorerBaseball":{
 						"properties": {
@@ -1233,7 +1233,7 @@
 						}
 					},
 					"scorerSoftball": {
-						"extends":"uri://registries/people#views/fullperson-km/view/properties/scorerBaseball"	
+						"$ref":"uri://registries/people#views/fullperson-km/view/properties/scorerBaseball"	
 					},
 					"photoInfo": {
 						"properties": {
@@ -1279,10 +1279,10 @@
 		},
 		"coachBaseball":{
 			"new":{
-				"extends":"uri://registries/people#models/coachBaseball"
+				"$ref":"uri://registries/people#models/coachBaseball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/coachBaseball"
+				"$ref":"uri://registries/people#models/coachBaseball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/coachBaseball",
@@ -1326,10 +1326,10 @@
 		},
 		"coachSoftball":{
 			"new":{
-				"extends":"uri://registries/people#models/coachSoftball"
+				"$ref":"uri://registries/people#models/coachSoftball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/coachSoftball"
+				"$ref":"uri://registries/people#models/coachSoftball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/coachSoftball",
@@ -1373,10 +1373,10 @@
 		},
 		"refereeBaseball":{
 			"new":{
-				"extends":"uri://registries/people#models/refereeBaseball"
+				"$ref":"uri://registries/people#models/refereeBaseball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/refereeBaseball"
+				"$ref":"uri://registries/people#models/refereeBaseball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/refereeBaseball",
@@ -1420,10 +1420,10 @@
 		},
 		"refereeSoftball":{
 			"new":{
-				"extends":"uri://registries/people#models/refereeSoftball"
+				"$ref":"uri://registries/people#models/refereeSoftball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/refereeSoftball"
+				"$ref":"uri://registries/people#models/refereeSoftball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/refereeSoftball",
@@ -1467,10 +1467,10 @@
 		},
 		"officerBaseball":{
 			"new":{
-				"extends":"uri://registries/people#models/officerBaseball"
+				"$ref":"uri://registries/people#models/officerBaseball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/officerBaseball"
+				"$ref":"uri://registries/people#models/officerBaseball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/officerBaseball",
@@ -1703,10 +1703,10 @@
 		},
 		"officerSoftball":{
 			"new":{
-				"extends":"uri://registries/people#models/officerSoftball"
+				"$ref":"uri://registries/people#models/officerSoftball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/officerSoftball"
+				"$ref":"uri://registries/people#models/officerSoftball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/officerSoftball",
@@ -1885,10 +1885,10 @@
 		},
 		"playerBaseball":{
 			"new":{
-				"extends":"uri://registries/people#models/playerBaseball"
+				"$ref":"uri://registries/people#models/playerBaseball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/playerBaseball"
+				"$ref":"uri://registries/people#models/playerBaseball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/playerBaseball",
@@ -1901,7 +1901,6 @@
 						}
 					}
 				],
-				"title":"Hráč",
 				"listFields": [
 					{
 						"field": "baseData.registrationID",
@@ -2150,10 +2149,10 @@
 		},
 		"playerSoftball":{
 			"new":{
-				"extends":"uri://registries/people#models/playerSoftball"
+				"$ref":"uri://registries/people#models/playerSoftball"
 			},
 			"view":{
-				"extends":"uri://registries/people#models/playerSoftball"
+				"$ref":"uri://registries/people#models/playerSoftball"
 			},
 			"search":{
 				"extends":"uri://registries/people#models/playerSoftball",

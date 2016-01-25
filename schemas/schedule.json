@@ -59,7 +59,7 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/schedule#blocks/baseData"
+					"$ref":"uri://registries/schedule#blocks/baseData"
 				}
 			}
 		}
@@ -68,10 +68,10 @@
 	"views": {
 		"schedule": {
 			"new": {
-				"extends":"uri://registries/schedule#models/schedule"
+				"$ref":"uri://registries/schedule#models/schedule"
 			},
 			"view": {
-				"extends":"uri://registries/schedule#models/schedule"
+				"$ref":"uri://registries/schedule#models/schedule"
 			},
 			"search": {
 				"extends":"uri://registries/schedule#models/schedule",

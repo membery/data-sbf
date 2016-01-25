@@ -118,10 +118,10 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/stadiums#blocks/baseData"
+					"$ref":"uri://registries/stadiums#blocks/baseData"
 				},
 				"additionalData":{
-					"extends":"uri://registries/stadiums#blocks/additionalData"
+					"$ref":"uri://registries/stadiums#blocks/additionalData"
 				}
 			}
 		}
@@ -130,10 +130,10 @@
 	"views":{
 		"stadium":{
 			"new":{
-				"extends":"uri://registries/stadiums#models/stadiums"
+				"$ref":"uri://registries/stadiums#models/stadiums"
 			},
 			"view":{
-				"extends":"uri://registries/stadiums#models/stadiums"
+				"$ref":"uri://registries/stadiums#models/stadiums"
 			},
 			"search":{
 				"extends":"uri://registries/stadiums#models/stadiums",

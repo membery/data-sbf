@@ -127,10 +127,10 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/competitionPart#blocks/baseData"
+					"$ref":"uri://registries/competitionPart#blocks/baseData"
 				},
 				"listOfTeam":{
-					"extends":"uri://registries/competitionPart#blocks/listOfTeam"
+					"$ref":"uri://registries/competitionPart#blocks/listOfTeam"
 				}
 			}
 		}
@@ -139,7 +139,7 @@
 	"views":{
 		"competitionPart":{
 			"new":{
-				"extends":"uri://registries/competitionPart#models/competitionPart"
+				"$ref":"uri://registries/competitionPart#models/competitionPart"
 			},
 			"view":{
 				"extends":"uri://registries/competitionPart#models/competitionPart",

@@ -379,13 +379,13 @@
 						}
 					},
 					"coachSoftball": {
-						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/coachBaseball"
+						"$ref":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/coachBaseball"
 					},
 					"refereeSoftball": {
-						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/refereeBaseball"
+						"$ref":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/refereeBaseball"
 					},
 					"scorerSoftball": {
-						"extends":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/scorerBaseball"
+						"$ref":"uri://registries/registrationRequests#views/peopleRegistrationApplicantBaseball/new/properties/scorerBaseball"
 					},
 					"officerSoftball": {
 						"properties": {
