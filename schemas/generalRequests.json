@@ -97,7 +97,6 @@
 				}
 			}
 		},
-
 		"attachments": {
 			"type": "object",
 			"transCode": "schema.requests.attachments",
@@ -134,7 +133,6 @@
 			}
 		}
 	},
-
 	"models": {
 		"request": {
 			"title": "Žiadosť",

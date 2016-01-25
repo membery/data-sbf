@@ -570,10 +570,10 @@
 	"views": {
 		"refereeReports": {
 			"new": {
-				"extends":"uri://registries/refereeReports#models/refereeReports"
+				"$ref":"uri://registries/refereeReports#models/refereeReports"
 			},
 			"view": {
-				"extends":"uri://registries/refereeReports#models/refereeReports"
+				"$ref":"uri://registries/refereeReports#models/refereeReports"
 			},
 			"search": {
 				"extends":"uri://registries/refereeReports#models/refereeReports",
@@ -615,7 +615,7 @@
 		},
 		"refereeReports-km": {
 			"new": {
-				"extends":"uri://registries/refereeReports#views/refereeReports-km/view"
+				"$ref":"uri://registries/refereeReports#views/refereeReports-km/view"
 			},
 			"view": {
 				"extends":"uri://registries/refereeReports#models/refereeReports-km",

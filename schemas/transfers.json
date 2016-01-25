@@ -163,7 +163,7 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/transfers#blocks/baseData"
+					"$ref":"uri://registries/transfers#blocks/baseData"
 				}
 			}
 		}
@@ -172,10 +172,10 @@
 	"views":{
 		"transfers":{
 			"new":{
-				"extends":"uri://registries/transfers#models/transfers"
+				"$ref":"uri://registries/transfers#models/transfers"
 			},
 			"view":{
-				"extends":"uri://registries/transfers#models/transfers"
+				"$ref":"uri://registries/transfers#models/transfers"
 			},
 			"search":{
 				"extends":"uri://registries/transfers#models/transfers",

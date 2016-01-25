@@ -27,7 +27,6 @@
 		"extends": "uri://registries/people#models/person",
 		"title": "Člen",
 		"transCode": "schema.member.view",
-
 		"security": {
 			"create": {
 				"static": [

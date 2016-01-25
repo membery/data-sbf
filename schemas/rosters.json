@@ -244,7 +244,7 @@
 			},
 			"properties": {
 				"baseData": {
-					"extends": "uri://registries/rosters#blocks/baseData"
+					"$ref": "uri://registries/rosters#blocks/baseData"
 				},
 				"coaches": {
 					"$ref": "uri://registries/rosters#blocks/coaches"
@@ -258,10 +258,10 @@
 	"views": {
 		"rosters": {
 			"new": {
-				"extends": "uri://registries/rosters#models/rosters"
+				"$ref": "uri://registries/rosters#models/rosters"
 			},
 			"view": {
-				"extends": "uri://registries/rosters#models/rosters"
+				"$ref": "uri://registries/rosters#models/rosters"
 			},
 			"search": {
 				"extends": "uri://registries/rosters#models/rosters",

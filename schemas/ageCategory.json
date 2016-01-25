@@ -89,7 +89,7 @@
 			},
 			"properties": {
 				"baseData": {
-					"extends": "uri://registries/ageCategory#blocks/baseData"
+					"$ref": "uri://registries/ageCategory#blocks/baseData"
 				},
 				"computation": {
 					"$ref": "uri://registries/ageCategory#blocks/computation"
@@ -100,10 +100,10 @@
 	"views": {
 		"ageCategory": {
 			"new": {
-				"extends": "uri://registries/ageCategory#models/ageCategory"
+				"$ref": "uri://registries/ageCategory#models/ageCategory"
 			},
 			"view": {
-				"extends": "uri://registries/ageCategory#models/ageCategory"
+				"$ref": "uri://registries/ageCategory#models/ageCategory"
 			},
 			"search": {
 				"extends": "uri://registries/ageCategory#models/ageCategory",

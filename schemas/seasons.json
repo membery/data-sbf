@@ -52,7 +52,7 @@
 			},
 			"properties":{
 				"baseData":{
-					"extends":"uri://registries/seasons#blocks/baseData"
+					"$ref":"uri://registries/seasons#blocks/baseData"
 				}
 			}
 		}
@@ -60,10 +60,10 @@
 	"views":{
 		"seasons":{
 			"new":{
-				"extends":"uri://registries/seasons#models/seasons"
+				"$ref":"uri://registries/seasons#models/seasons"
 			},
 			"view":{
-				"extends":"uri://registries/seasons#models/seasons"
+				"$ref":"uri://registries/seasons#models/seasons"
 			},
 			"search":{
 				"extends":"uri://registries/seasons#models/seasons",
